@@ -28,6 +28,10 @@
 
 
         {!! Form::close() !!}
+
+        
     </div>
+
+    
 @endsection
 

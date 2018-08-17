@@ -12,25 +12,35 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $role_employee = Role::where("name", "director")->first();
-        $role_manager  = Role::where("name", "teacher")->first();
+        $role_direction = Role::where("name", "direction")->first();
+        $role_teacher  = Role::where("name", "enseignant")->first();
 
-        $employee = new User();
-        $employee->name = "Hélène Laforest";
-        $employee->email = "employee@example.com";
-        $employee->identification = "dir0001";
-        $employee->password = bcrypt("secret");
-        $employee->save();
+        $direction = new User();
+        $direction->name = "Hélène Laforest";
+        $direction->email = "direction@example.com";
+        $direction->identification = "dir0001";
+        $direction->password = bcrypt("123123");
+        $direction->save();
 
-        $employee->roles()->attach($role_manager);
+        $direction->roles()->attach($role_direction);
 
-        $manager = new User();
-        $manager->name = "Ghislain Girard";
-        $manager->email = "manager@example.com";
-        $manager->identification = "ens0002";
-        $manager->password = bcrypt("secret");
-        $manager->save();
+        $teacher = new User();
+        $teacher->name = "Ghislain Girard";
+        $teacher->email = "ghischa@gmail.com";
+        $teacher->identification = "ens0002";
+        $teacher->password = bcrypt("123123");
+        $teacher->save();
 
-        $manager->roles()->attach($role_employee);
+        $teacher->roles()->attach($role_teacher);
+
+
+        $teacher = new User();
+        $teacher->name = "Chantal Nolet";
+        $teacher->email = "Chantal.nolet39@gmail.com";
+        $teacher->identification = "ens0002";
+        $teacher->password = bcrypt("123123");
+        $teacher->save();
+
+        $teacher->roles()->attach($role_teacher);
     }
 }

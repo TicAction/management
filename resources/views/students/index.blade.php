@@ -1,9 +1,10 @@
 @extends('layouts.teacher')
 
+
 @section('content')
 
 
-    <h4>Je suis la page des jeunes</h4>
+<h4>Élève de ma classe</h4>
 
 <table class="table table-striped table-sm">
     <tr>
@@ -11,11 +12,11 @@
         <th>Anniversaire</th>
         <th>Actions</th>
 
-    </tr>
-    @foreach($students as $student)
+    </tr> 
+    @foreach(Auth::user()->students as $student)
     <tr>
         <td>{{$student->fullname}}</td>
-        <td>{{$student->anniversary}}</td>
+        <td>{{$student->anniversary->format('d - M - Y')}}</td>
         <td>
             <a href="{{route('student_edit',$student->id)}}"><button class="btn btn-info btn-sm">Modifier la fiche</button> </a>
 
@@ -31,7 +32,4 @@
 
 
 
-
-
 @endsection
-

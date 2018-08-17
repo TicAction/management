@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -24,9 +25,9 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['enseignant','directeur']);
+        $request->user()->authorizeRoles(['direction','enseignant']);
         $students =Student::all();
-        $students->load('users');
+
 
         return view('students.index',compact('students'));
     }
@@ -38,7 +39,7 @@ class StudentController extends Controller
      */
     public function create(Request $request)
     {
-      $request->user()->authorizeRoles(['enseignant','directeur']);
+      // $request->user()->authorizeRoles(['enseignant','directeur']);
         $students = Student::orderBy('lastname')->get();
         return view('students.create',compact('students'));
     }
@@ -62,7 +63,7 @@ class StudentController extends Controller
 
         $student->users()->attach(Auth::user()->id);
         Session::flash('success', "Vous avez bien enregistré l'élève");
-        return redirect('eleve/create');
+        return redirect('eleve');
     }
 
     /**

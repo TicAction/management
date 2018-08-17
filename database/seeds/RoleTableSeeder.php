@@ -55,6 +55,12 @@ class RoleTableSeeder extends Seeder
         $role_manager->save();
 
         $role_manager = new Role();
+        $role_manager->name = "ortho";
+        $role_manager->description = "Voit tous les enfants suivient en ortho";
+        $role_manager->save();
+
+
+        $role_manager = new Role();
         $role_manager->name = "parent";
         $role_manager->description = "Le parent voit les informations sur son ou ses enfants.";
         $role_manager->save();

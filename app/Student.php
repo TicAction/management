@@ -38,4 +38,19 @@ class Student extends Model
     {
         return $this->attributes['lastname'] = ucfirst($lastname);
     }
+
+    public function academy()
+    {
+      return $this->hasOne(Academy::class);
+    }
+
+    public function particular()
+    {
+      return $this->hasOne(Particular::class);
+    }
+
+    public function service()
+    {
+      return $this->hasOne(Service::class);
+    }
 }

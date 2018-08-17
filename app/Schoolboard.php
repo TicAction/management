@@ -20,4 +20,10 @@ class Schoolboard extends Model
     {
         return $this->hasMany(School::class);
     }
+    // manytomany morphTo
+    public function groups()
+    {
+      return $this->morphMany(Group::class, 'groupable');
+    }
+
 }

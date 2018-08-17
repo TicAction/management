@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class School extends Model
 {
+
+  public $timestamps =false;
+
     protected $fillable = [
         'school_name',
         'school_region',
@@ -20,4 +23,11 @@ class School extends Model
     {
         return $this->belongsTo(Schoolboard::class);
     }
+
+    public function users()
+    {
+      return $this->belongsToMany(User::class);
+    }
+    // manytomany morphTo
+  
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Role;
+use App\Group;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -66,7 +67,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'name'     => $data['name'],
             'email'    => $data['email'],
@@ -74,24 +74,29 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-       if($user->identification === "Dir00001"){
-           $user
-               ->roles()
-               ->attach(Role::where('name', 'direction')->first());
 
-           return $user;
-       }elseif($user->identification === "Ens00001"){
-           $user
-               ->roles()
-               ->attach(Role::where('name', 'enseignant')->first());
-           return $user;
-
-       }else{
-           $user
-               ->roles()
-               ->attach(Role::where('name', 'parent')->first());
-           return $user;
-       }
+        $group = Group::all();
+        foreach ($group as  $gr)
+        {
+           if($user->identification === $gr->group_code)
+           {
+               $user
+                   ->roles()
+                   ->attach(Role::where('name', $gr->group_name)->first());
+               return $user;
+           }
+           elseif($user->identification === 'Dir2018-2019')
+           {
+             $user
+                   ->roles()
+                   ->attach(Role::where('name', $gr->group_name)->first());
+             return $user;
+           }
+        }
 
     }
+
+
+
+
 }
