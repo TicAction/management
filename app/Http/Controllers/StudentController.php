@@ -75,6 +75,8 @@ class StudentController extends Controller
     public function show(Request $request, Student $student)
     {
         $request->user()->authorizeRoles(['enseignant','directeur']);
+        $student->load('services');
+
         return view("students.show",compact('student'));
     }
 

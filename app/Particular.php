@@ -7,18 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Particular extends Model
 {
 	public $fillable =[
-	'behavior',
-	'academic',
-	'famillial',
-	'allergy',
-	'disease',
+	'particular',
 	'comment',
-	'student_id',
 	];
 	public $dates =['created_at','updated_at'];
 
-     public function student()
+     public function students()
     {
-    	return $this->belongsTo(Student::class);
+    	return $this->belongsToMany(Student::class);
     }
 }

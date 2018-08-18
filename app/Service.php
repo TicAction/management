@@ -8,19 +8,13 @@ class Service extends Model
 {
 
 	public $fillable =[
-			'ortho',
-            'psy_ed',
-            'ts',
-            'psycho',
-            'sdg',
-            'pi',
-            'comment',
-            'student_id',
+			'service',
+			'comment',
 	];
-	public $dates =['created_at','updated_at'];
+	public $dates =['created_at','updated_at','start_date','end_date'];
 
-    public function student()
+    public function students()
     {
-    	return $this->belongsTo(Student::class);
+    	return $this->belongsToMany(Student::class);
     }
 }

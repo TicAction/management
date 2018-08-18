@@ -15,13 +15,8 @@ class CreateParticularsTable extends Migration
     {
         Schema::create('particulars', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('behavior')->nullable();
-            $table->string('academic')->nullable();
-            $table->string('famillial')->nullable();
-            $table->string('allergy')->nullable();
-            $table->string('disease')->nullable();
+            $table->string('particular')->nullable();
             $table->longText('comment')->nullable();
-            $table->integer('student_id')->unsigned();
             $table->timestamps();
         });
     }

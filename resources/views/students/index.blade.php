@@ -15,7 +15,7 @@
     </tr> 
     @foreach(Auth::user()->students as $student)
     <tr>
-        <td>{{$student->fullname}}</td>
+        <td><a href="{{route('student_show',$student->id)}}">{{$student->fullname}}</a></td>
         <td>{{$student->anniversary->format('d - M - Y')}}</td>
         <td>
             <a href="{{route('student_edit',$student->id)}}"><button class="btn btn-info btn-sm">Modifier la fiche</button> </a>

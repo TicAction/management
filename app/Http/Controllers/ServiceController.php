@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Service;
+use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -24,9 +25,10 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('services.create');
+        $student = Student::find($id);
+        return view('services.create',compact('student'));
     }
 
     /**
@@ -37,29 +39,20 @@ class ServiceController extends Controller
      */
     public function store(Request $request, Service $service)
     {
-        $service->ortho = $request->get('ortho');
-        $service->psy_ed = $request->get('psy_ed');
-        $service->ts = $request->get('ts');
-        $service->psycho = $request->get('psycho');
-        $service->sdg = $request->get('sdg');
-        $service->pi = $request->get('pi');
+        $student = $request->get('student');
+        $service->service = $request->get('service');
+        $service->start_date = $request->get('start_date');
+        $service->end_date = $request->get('end_date');
         $service->comment = $request->get('comment');
-        $service->student_id = $request->get('student_id');
+       
         $service->save();
+        
+        $service->students()->attach($student);
 
-        return redirect('service');
+        return redirect('eleve');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Service $service)
-    {
-        //
-    }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -69,6 +62,8 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
+
+
         return view('services.edit',compact('service'));
     }
 
@@ -81,18 +76,18 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        $service->ortho = $request->get('ortho');
-        $service->psy_ed = $request->get('psy_ed');
-        $service->ts = $request->get('ts');
-        $service->psycho = $request->get('psycho');
-        $service->sdg = $request->get('sdg');
-        $service->pi = $request->get('pi');
+       
+        $service->service = $request->get('service');
+        $service->start_date = $request->get('start_date');
+        $service->end_date = $request->get('end_date');
         $service->comment = $request->get('comment');
-        $service->student_id = $request->get('student_id');
+       
        $service->update();
+        $service->students()->sync('4');
+       
 
       Session::flash('success','Vos modifications ont été effectuées avec succès');
-      return redirect('service');
+      return redirect('eleve/4');
     }
 
     /**

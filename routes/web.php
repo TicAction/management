@@ -57,7 +57,7 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //services section
 Route::get('service','ServiceController@index')->name('service_index');
-Route::get('service/creation','ServiceController@create')->name('service_create');
+Route::get('service/creation/{id}','ServiceController@create')->name('service_create');
 Route::post('service','ServiceController@store')->name('service_store');
 Route::get('service/{service}','ServiceController@show')->name('service_show');
 Route::get('service/{service}/modifier','ServiceController@edit')->name('service_edit');

@@ -38,15 +38,11 @@ class ParticularController extends Controller
     public function store(Request $request, Particular $particular)
     {
 
-       $particular->behavior = $request->get('behavior');
-       $particular->academic = $request->get('academic');
-       $particular->famillial = $request->get('famillial');
-       $particular->allergy = $request->get('allergy');
-       $particular->disease = $request->get('disease');
+       $particular->particular = $request->get('particular');
        $particular->comment = $request->get('comment');
-       $particular->student_id = $request->get('student_id');
-       $particular->save();
 
+       $particular->save();
+       $particular->students()->attach('4');
        return redirect('particulier');
         
     }

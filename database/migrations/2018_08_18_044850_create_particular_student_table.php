@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServicesTable extends Migration
+class CreateParticularStudentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('particular_student', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('service');
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->longtext('comment')->nullable();
+            $table->integer('student_id')->unsigned();
+            $table->integer('particular_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('particular_student');
     }
 }

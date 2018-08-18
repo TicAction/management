@@ -44,13 +44,13 @@ class Student extends Model
       return $this->hasOne(Academy::class);
     }
 
-    public function particular()
+    public function particulars()
     {
-      return $this->hasOne(Particular::class);
+      return $this->belongsToMany(Particular::class);
     }
 
-    public function service()
+    public function services()
     {
-      return $this->hasOne(Service::class);
+      return $this->belongsToMany(Service::class);
     }
 }
